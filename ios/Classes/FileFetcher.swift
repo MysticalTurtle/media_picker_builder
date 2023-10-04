@@ -211,7 +211,7 @@ class FileFetcher {
 
         PHCachingImageManager.default().requestImage(for: asset, targetSize: imageSize, contentMode: imageContentMode, options: options) { (image, info) in
             if(image != nil) {
-                if let imageRep = UIImagePNGRepresentation(image!) {
+                if let imageRep = image!.pngData() {
                     do {
                         try imageRep.write(to: destination)
                         saved = true
@@ -328,7 +328,7 @@ class FileFetcher {
     }
 }
 
-extension UIImageOrientation{
+extension UIImage.Orientation{
     func inDegrees() -> Int {
         switch  self {
         case .down:
